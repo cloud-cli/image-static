@@ -1,0 +1,2 @@
+# image-static
+Statics server
