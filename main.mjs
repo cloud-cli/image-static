@@ -11,7 +11,7 @@ export default async function (request, response, next) {
   const isGet = request.method === "GET";
   const fullPath = join(rootDir, normalize(url.pathname));
   const showList = (enableIndex && noIndexFile && isGet && request.url === "/") ||
-    (enableIndex && isGet && statSync(path).isDirectory() && !existsSync(join(fullPath, 'index.html'));
+    (enableIndex && isGet && statSync(path).isDirectory() && !existsSync(join(fullPath, 'index.html')));
 
   if (showList) {
     const list = await readdir(fullPath, { withFileTypes: true });
