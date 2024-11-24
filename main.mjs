@@ -11,13 +11,11 @@ export default async function (request, response, next) {
   const isGet = request.method === "GET";
   const fullPath = join(rootDir, normalize(url.pathname));
   const showList = (enableIndex && noIndexFile && isGet && request.url === "/") ||
-    (enableIndex && isGet && statSync(path).isDirectory() && !existsSync(join(fullPath, 'index.html')));
+    (enableIndex && isGet && statSync(fullPath).isDirectory() && !existsSync(join(fullPath, 'index.html')));
 
   if (showList) {
     const list = await readdir(fullPath, { withFileTypes: true });
-    const files = list
-      .filter((f) => f.isFile())
-      .map(({ name }) => `<a href="/${name}" title="Open ${name}">${name}</a>`);
+    const files = list.map(({ name }) => `<a href="/${name}" title="Open ${name}">${name}</a>`);
 
     const html = "<h1>Files at </h1><hr/><nav>" + files.join("<br/>") + "</nav>";
 
