@@ -23,7 +23,7 @@ export default async function (request, response, next) {
     const list = await readdir(fullPath, { withFileTypes: true });
     const files = list.map(({ name }) => `<a href="${join(relativePath, name)}" title="Open ${name}">${name}</a>`);
 
-    const html = "<h1>Files at </h1><hr/><nav>" + files.join("<br/>") + "</nav>";
+    const html = "<h1>Files at " + fullPath.replace(rootDir, '') + "</h1><hr/><nav>" + files.join("<br/>") + "</nav>";
 
     response.end(html);
     return;
