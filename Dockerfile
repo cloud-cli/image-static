@@ -1,3 +1,3 @@
-FROM ghcr.io/cloud-cli/node:latest
+FROM ghcr.io/cloud-cli/image-node:latest
 
 ADD . /home/app
